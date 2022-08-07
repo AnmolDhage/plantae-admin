@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  margin: 2rem 0;
+  justify-content: space-between;
+}
+
+.selected-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid black;
+}
