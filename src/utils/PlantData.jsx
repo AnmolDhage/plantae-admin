@@ -19,7 +19,7 @@ export const columns = [
     field: 'price',
     headerName: 'Price',
     type: 'number',
-    width: 50,
+    width: 70,
   },
   {
     field: 'availableQuantity',
