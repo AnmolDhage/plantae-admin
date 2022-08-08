@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import useFetch from '../../hooks/useFetch';
-import { TextField } from '@mui/material';
+import { Switch, TextField } from '@mui/material';
 import "./editModal.css"
 import axios from 'axios';
 
@@ -24,6 +24,15 @@ export default function EditModal({ open, setOpen, id, reFetch }) {
 
   const handleClose = () => setOpen(false);
   const { data, loading } = useFetch(`/plants/${id}`)
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChecked = (event) => {
+    setChecked(event.target.checked);
+    setPlantData(prev => ({
+      ...prev,
+      featured: !checked
+    }))
+  };
 
   const [plantData, setPlantData] = React.useState({
     name: data?.name,
@@ -49,7 +58,9 @@ export default function EditModal({ open, setOpen, id, reFetch }) {
       type: data?.type,
       vendor: data?.vendor,
       price: data?.price
-    }))
+    }));
+
+    setChecked(data?.featured)
 
   }, [data])
 
@@ -105,6 +116,15 @@ export default function EditModal({ open, setOpen, id, reFetch }) {
 
               <TextField
                 id="desc" onChange={e => handleChange(e)} defaultValue={plantData?.desc} label="Description" variant="standard" />
+              <div>
+                <span>Featured</span>
+                <Switch
+                  label="featured"
+                  checked={checked}
+                  onChange={handleChecked}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </div>
 
               <Button onClick={handleEdit} variant="contained">Edit</Button>
             </div>

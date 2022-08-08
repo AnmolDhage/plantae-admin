@@ -14,7 +14,7 @@ export default function DataTable() {
   let rows = [];
 
   const pushRows = () => {
-    data?.plants?.map(plant => rows.push({ id: plant._id, availableQuantity: plant.availableQuantity, discount: plant.discount, name: plant.name, featured: true, price: plant.price, rating: plant.rating, type: plant.type, vendor: plant.vendor })
+    data?.plants?.map(plant => rows.push({ id: plant._id, availableQuantity: plant.availableQuantity, discount: plant.discount, name: plant.name, featured: plant.featured, price: plant.price, rating: plant.rating, type: plant.type, vendor: plant.vendor })
     )
   }
 

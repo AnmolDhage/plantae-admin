@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import { TextField } from '@mui/material';
 import "./../EditModal/editModal.css"
 import axios from 'axios';
+import Switch from '@mui/material/Switch';
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
 
@@ -26,6 +27,16 @@ export default function CreateModal({ open, setOpen, reFetch }) {
   const [files, setFiles] = React.useState("");
   const handleClose = () => setOpen(false);
   const [plantData, setPlantData] = React.useState({})
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChecked = (event) => {
+    setChecked(event.target.checked);
+    console.log(checked);
+    setPlantData(prev => ({
+      ...prev,
+      featured: !checked
+    }))
+  };
 
   const handleChange = (e) => {
     setPlantData(prev => ({
@@ -99,7 +110,7 @@ export default function CreateModal({ open, setOpen, reFetch }) {
                 id="featured" onChange={e => handleChange(e)} label="Featured" variant="standard" /> */}
 
               <TextField
-                id="vendor" onChange={e => handleChange(e)} label="Vendor" variant="standard" />
+                id="vendor" onChange={e => handleChange(e)} label="Vendor" defaultValue="Plantae" variant="standard" />
 
               <TextField
                 id="rating" type="number" onChange={e => handleChange(e)} label="Rating" variant="standard" />
@@ -112,7 +123,15 @@ export default function CreateModal({ open, setOpen, reFetch }) {
 
               <TextField
                 id="desc" onChange={e => handleChange(e)} label="Description" variant="standard" />
-
+              <div>
+                <span>Featured</span>
+                <Switch
+                  label="featured"
+                  checked={checked}
+                  onChange={handleChecked}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </div>
               <Button onClick={handleCreate} variant="contained">Create</Button>
             </div>
           </div>
