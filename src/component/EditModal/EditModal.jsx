@@ -71,7 +71,8 @@ export default function EditModal({ open, setOpen, id, reFetch }) {
     }))
   }
 
-  const handleEdit = async () => {
+  const handleEdit = async (e) => {
+    e.preventDefault();
     try {
       await axios.put(`/plants/${id}`, plantData)
       setOpen(false)
